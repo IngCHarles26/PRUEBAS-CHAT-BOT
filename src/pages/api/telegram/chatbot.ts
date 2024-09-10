@@ -1,3 +1,5 @@
+import { genHTTP } from '@/helpers/telegram/helpers';
+import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 type TelegramMessage = {
@@ -18,17 +20,23 @@ export default async function handler(
   // if (req.method === 'POST') {
     const { message }: TelegramMessage = req.body;
 
-    if (message && message.text) {
-      const chatId = message.chat.id;
-      const text = message.text;
+      // const chatId = message.chat.id;
+      // const text = message.text;
 
 
       // console.log(text)
       // Aquí puedes manejar el mensaje de los usuarios
-      await sendTelegramMessage(chatId, `Recibido: ${text}`);
-    }
+      try{
+        await axios.post(genHTTP('sendMessage'),{
+          chat_id:1573982513,
+          text: 'probando mensaje'
+        })
+        res.status(200).json({message: 'mensaje enviado correctamente'})
+      }catch(err){
+        console.log(err)
+      }
+      // res.status(200).json({ message: 'todo ok' });
 
-    res.status(200).json({ status: 'ok' });
   // } else {
   //   res.status(405).json({ error: 'Method Not Allowed' });
   // }
