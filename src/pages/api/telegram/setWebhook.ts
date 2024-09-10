@@ -7,7 +7,7 @@ export default async function handler(
   const token = process.env.TELEGRAM_KEY;
   const url = `https://api.telegram.org/bot${token}/setWebhook`;
 
-  const webhookUrl = `${process.env.DOMAIN_URL}/api/chatbot`; // URL de tu aplicación Next.js
+  const webhookUrl = `${process.env.DOMAIN_URL}/api/telegram/chatbot`; // URL de tu aplicación Next.js
 
   const response = await fetch(url, {
     method: 'POST',

@@ -20,16 +20,16 @@ export default async function handler(
   // if (req.method === 'POST') {
     const { message }: TelegramMessage = req.body;
 
-      // const chatId = message.chat.id;
-      // const text = message.text;
+      const chatId = message.chat.id;
+      const text = message.text;
 
 
       // console.log(text)
       // Aquí puedes manejar el mensaje de los usuarios
       try{
         await axios.post(genHTTP('sendMessage'),{
-          chat_id:1573982513,
-          text: 'probando mensaje'
+          chat_id:chatId,
+          text: `tu mensaje [${text}]`
         })
         res.status(200).json({message: 'mensaje enviado correctamente'})
       }catch(err){
